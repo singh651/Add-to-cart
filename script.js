@@ -43,10 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderCart() {
         cartItems.innerHTML = ""; // Clear the previous cart items
 
-        if (cart.length === 0) {
-            // emptyCartMessage.classList.remove("hidden");
-            // cartTotalMessage.classList.add("hidden");
-        } else {
+        if (cart.length > 0) {
             emptyCartMessage.classList.add("hidden");
             cartTotalMessage.classList.remove("hidden");
 
@@ -60,21 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             totalPriceDisplay.textContent = `$${total.toFixed(2)}`;
+        }  
+
+        else {
+            emptyCartMessage.classList.remove("hidden");
+            totalPriceDisplay.textContent = "$0.00";
+            emptyCartMessage.textContent = "Your cart is again empty";
         }
+        
     }
 
     // Event listener for Checkout button
     checkoutBtn.addEventListener("click", () => {
-        if (cart.length > 0) {
-            alert("Checkout Successfully");
-            cart.length = 0; // Clear the cart array
-            renderCart(); // Re-render the cart
-
-            // Reset the total price to $0.00 and show empty cart message
-            
-            cartTotalMessage.classList.add("hidden");
-            emptyCartMessage.classList.remove("hidden");
-            totalPriceDisplay.textContent = "$0.00";
-        }
+        cart.length = 0;
+        alert("Checkout Successful");
+        renderCart();
     });
 });
